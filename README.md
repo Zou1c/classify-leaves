@@ -47,13 +47,33 @@ notebook地址：https://www.kaggle.com/code/zixthw/classify-leaves-18000train-1
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/c0b020d7-d0f7-4eef-acee-82ab7c7d922f)  
 notebook地址：https://www.kaggle.com/code/zixthw/classify-leaves-13000-5000  
 
-这一次精度有了明显提升，只是将训练数据多“喂”给模型就可以，5000多个图片作为验证集也够用了。因为大致看了一下每个种类数所包含的图片数量，最少的也有个一半左右该类别的数量了，验证集的大部分也都在50张图片以上。  
+这一次精度有了明显提升，只是将训练数据多“喂”给模型就可以，5000多个图片作为验证集也够用了。因为大致看了一下每个种类数所包含的图片数量，最少的也有个一半左右该类别的数量了，验证集的大部分也都在50张图片以上。    
+
 但是我感觉精度一直上不去是过拟合的原因，所以我的下一次思路是在模型末尾添加dropout层，也许能提升精度——大概吧，我当时想。  
 
 ### 第三次尝试(ResNet + 个人的dropout，private score 0.81, train:valid = 13:5)
 跟第二次比相当于就改了模型结构  
-但结果比较惨，我在如下代码的Linear部分改来改去都没什么太好的效果，还不如不加这个dropout。
+但结果比较惨，我在如下代码的Linear部分改来改去都没什么太好的效果，还不如不加这个dropout：  
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/d7e0e65c-9f88-475b-99eb-1170ea021142)
+
 notebook地址：https://www.kaggle.com/code/zixthw/classifyleaves-deal-overfitting-13-5  
-看来确实不要动已经提出的模型/(ㄒoㄒ)/~~
+看来确实是这样的，不是专家不要动已经提出的模型/(ㄒoㄒ)/~~
+
 
 ### 第四次尝试(ResNet，private score 0.89, train:valid = 2:16)
+前面的尝试中我也不停地调超参数，感觉此时调超参数好像对精度大幅提升还是比较无力。  
+于是我又回归到数据集的划分上，我再多给模型一些训练数据会怎样，验证集的数量还够用吗？  
+于是做了两次划分：    
+一次将前2000个作为验证集；令一次将后2000个作为验证集。  
+效果还不错，两个模型中有一个能达到私榜接近90%的正确率了：  
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/1e996237-ac06-4e49-b06d-c1eee93a5fe7)  
+notebook地址：https://www.kaggle.com/code/zixthw/classify-leaves-1-8  
+这应该算是我个人的最后一次尝试了。我此时仍然用的d2l里的api进行训练，并且一想到基本的ResNet就可以达到96%的正确率，我感觉会不会是我的ResNet层数太少了，还是训练过程还是自己手写来的好？  
+我有点迷茫了，毕竟在数据集划分上，（我感觉啊，后面没有尝试了）应该不会再有比较大的提升了。
+我可能要考虑换整个模型了， 并且是时候考虑k则交叉验证了（虽然花的时间就是k倍了）。正好kaggle一周30h免费GPU也被用完了，就先缓一缓。
+
+### 第五次尝试(ResNest，k_fold=5，private score 0.98)
+
+
+
+

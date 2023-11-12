@@ -73,7 +73,7 @@ notebook地址：https://www.kaggle.com/code/zixthw/classify-leaves-1-8
 我可能要考虑换整个模型了， 并且是时候考虑k则交叉验证了（虽然花的时间就是k倍了）。正好kaggle一周30h免费GPU也被用完了，就先缓一缓。
 ***
 ### 第五次尝试(ResNest，k_fold=5，private score 0.98)
-
+to be continue
 
 
 

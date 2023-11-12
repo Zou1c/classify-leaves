@@ -13,7 +13,9 @@
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/2eed46eb-6160-495e-8c86-c384682078ac)
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/6fa64a42-345d-4e4f-9aba-580606c80a53)
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/da71e54b-8988-4095-8010-2da6bc78fd73)
-![image](https://github.com/Zou1c/classify-leaves/assets/58977192/128c7ba8-ed6a-427e-aae0-d17b2191a056)  
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/128c7ba8-ed6a-427e-aae0-d17b2191a056)
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/aec5c5ef-fff9-4152-896f-b95b673af4ec)
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/1bb8bd53-3f6f-49ac-b556-a22bad36a478)
 可以看到背景还是比较单一的，因此训练起来还是容易收敛的。
 *** 
 ### csv文件

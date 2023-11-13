@@ -75,7 +75,14 @@ notebook地址：https://www.kaggle.com/code/zixthw/classify-leaves-1-8
 我可能要考虑换整个模型了， 并且是时候考虑k则交叉验证了（虽然花的时间就是k倍了）。正好kaggle一周30h免费GPU也被用完了，就先缓一缓。
 ***
 ### 第五次尝试(ResNest，k_fold=5，private score 0.98)
-to be continue
-
+#### 点击搜索
+由于很想提高预测正确率到96%以上，但不确定换一个什么模型(会比ResNet好，其实更深的ResNet也不会写..)，于是我直接在kaggle公开的notebook上搜索了本次实验的名字。  
+于是搜到了原课程竞赛中第七名的Charlesyyun所分享的notebook(7th: ResNeSt+ResNeXt+DenseNet (0.98840))，非常感谢他的代码与思路分享！🤩  
+Charlesyyun的树叶分类的notebook地址如下：  
+- https://www.kaggle.com/code/charlesyyun/7th-resnest-resnext-densenet-0-98840
+#### 我的思路
+事实上基本都是~~复制粘贴~~复现Charlesyyun的代码，甚至还没完成其三分之一。
+##### 网络模型
+只选取了ResNeSt模型，但是课本和视频中似乎都没有介绍这个模型，所以这里简单介绍一下(与ResNet的区别)
 
 

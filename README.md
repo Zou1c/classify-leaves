@@ -1,6 +1,7 @@
 # classify-leaves
-李沐的《动手学深度学习Pytorch版》视频里，记录一下我进行树叶分类实验的尝试过程。  
-竞赛地址：https://www.kaggle.com/c/classify-leaves
+李沐老师的《动手学深度学习Pytorch版》视频里，第30节发布了一个竞赛实验。    
+竞赛地址：https://www.kaggle.com/c/classify-leaves  
+这里记录一下我进行树叶分类实验的尝试过程和代码分享。
 
 ## 下载的数据集
 ### 图片

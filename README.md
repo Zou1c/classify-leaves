@@ -1,5 +1,5 @@
 # classify-leaves
-李沐《动手学深度学习》的树叶分类实验尝试的一个小结  
+李沐的《动手学深度学习Pytorch版》视频里，记录一下我进行树叶分类实验的尝试过程。  
 竞赛地址：https://www.kaggle.com/c/classify-leaves
 
 ## 下载的数据集
@@ -81,8 +81,62 @@ notebook地址：https://www.kaggle.com/code/zixthw/classify-leaves-1-8
 Charlesyyun的树叶分类的notebook地址如下：  
 - https://www.kaggle.com/code/charlesyyun/7th-resnest-resnext-densenet-0-98840
 #### 我的思路
-事实上基本都是~~复制粘贴~~复现Charlesyyun的代码，甚至还没完成其三分之一。
+事实上基本都是~~复制粘贴~~复现Charlesyyun代码中的第一个部分——基于ResNeSt模型部分。  
+这里先给出我的代码：https://www.kaggle.com/code/zixthw/classify-leaves-resnest-k-5-but
 ##### 网络模型
-只选取了ResNeSt模型，但是课本和视频中似乎都没有介绍这个模型，所以这里简单介绍一下(与ResNet的区别)
+只选取了ResNeSt50模型，但是课本和视频中似乎都没有介绍这个模型，所以这里简单介绍一下(与ResNet的区别)：  
 
 
+##### 数据增强(裁剪、翻转、颜色增强)
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/bbf71ecc-7dd9-4b8a-8e79-d19d0a83ebea)  
+每行代码解释：  
+transforms.RandomResizedCrop(224, scale=(0.08, 1.0), ratio=(3.0 / 4.0, 4.0 / 3.0))：  
+随机裁剪图像，裁剪后的图像大小(扩充)为 224 x 224 像素。  
+- 裁剪区域的面积在原始图像面积的 8% 到 100% 之间。
+- 裁剪区域的高宽比在 3:4 和 4:3 之间。  
+***
+transforms.RandomHorizontalFlip()：
+- 以 0.5 的概率进行水平翻转（左右翻转）。
+***
+transforms.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4)：
+- 随机更改亮度、对比度和饱和度。
+- 亮度、对比度和饱和度的变化范围都是 [-0.4, 0.4]。
+***
+transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])：
+- 标准化图像的每个通道，使用给定的均值和标准差(imagenet训练时会使用的参数)。这是为了将图像的像素值归一化，以便更好地适应深度学习模型的训练。
+***
+##### cutmix数据增强
+cutmix主要的处理过程如下：  
+- 图像混合：对于每个训练样本，CutMix 会随机选择一张图像，并从该图像中随机剪切一个矩形区域。然后，将这个剪切的区域粘贴到当前图像上，同时调整标签以反映新的混合图像。
+- 混合参数：记录混合过程的参数，如混合区域的位置和大小，以及混合图像中原始图像的贡献程度。
+- 生成新样本： 最终，生成的新样本包含(前两步)混合后的图像以及相应的标签。
+- 使用官方推荐的损失函数`CutMixCrossEntropyLoss`  
+CutMix：https://github.com/ildoonet/cutmix  
+代码中的处理顺序：  
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/8f058750-d31d-432c-89ce-da1000fff1f5)  
+可以看到是先用自己的train_transform处理，再用CutMix处理。
+
+###### cutmix的numpy版本问题
+由于kaggle的notebook已经不支持numpy=1.20.0以下的版本了，但是在1.20版本后numpy.int的写法已经不行了，cutmix库里仍有两行代码在使用。  
+所以需要运行如下指令修改cutmix源码中的np.int为int(否则会报错)：
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/4fdcdd75-2a71-411d-9374-c1b1c9503e2d)
+
+
+##### 训练的超参数
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/d6dc2fc0-009a-43d8-8a22-aba530edfffe)
+
+##### 训练与预测过程
+- 我还是将训练的训练正确率给每次打印出来了。  
+fold 0 的最后：
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/aa140dc7-5cf8-4113-a2af-7add77dd7204)  
+可能是因为使用了不同的损失函数吧，训练损失和正确率与验证损失和正确率差别还挺大的。  
+
+- 由于当时晚上该睡觉了，但是只跑了k=0,1,2的模型，电脑开着对宿舍休息不太好，所以临时终止了完整的5则交叉验证的过程。
+- 由于跑完一个模型就保存了模型参数(pth文件)，所以中止cell执行后，仍然有三个模型结果。把后面的投票过程改为只有k=0,1,2三个进行投票也可以得到一个(效果还不错的？)ResNeSt预测结果。
+
+##### 提交结果
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/d386731f-f205-4e9f-83a2-317fbd9acda7)
+
+### 小结
+其实还是留有一些疑问和未做的尝试的，要学的还有很多。。  
+总之先写到这里吧。

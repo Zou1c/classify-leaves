@@ -87,13 +87,13 @@ Charlesyyun的树叶分类的notebook地址如下：
 ##### 网络模型
 我没有按照Charlesyyun的思想选取多个模型最后综合取值，~~图快~~只选取了ResNeSt50模型  
 《ResNeSt: Split-Attention Networks》  
-代码：https://github.com/zhanghang1989/ResNeSt
-论文：https://hangzhang.org/files/resnest.pdf
-可以说ResNeSt与ResNet最主要的不同就是这个split-attention单元了：
-![image](https://github.com/Zou1c/classify-leaves/assets/58977192/5352b76a-2734-4f1f-92c0-a994c1acd565)  
-(split attention unit)
+代码：https://github.com/zhanghang1989/ResNeSt  
+论文：https://hangzhang.org/files/resnest.pdf  
+可以说ResNeSt与ResNet最主要的不同就是这个split-attention单元了：  
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/5352b76a-2734-4f1f-92c0-a994c1acd565)   
+(split attention unit)  
 
-SE-Net Block，SK-Net Block和RestNeSt Block的对比：
+SE-Net Block，SK-Net Block和RestNeSt Block的对比：  
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/73230783-a6d6-4ccc-9998-a4159df69913)  
 (由于还没有学到注意力机制，所以只能介绍到这里了😢)
 

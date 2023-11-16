@@ -85,8 +85,17 @@ Charlesyyun的树叶分类的notebook地址如下：
 事实上基本都是~~复制粘贴~~复现Charlesyyun代码中的第一个部分——基于ResNeSt模型部分。  
 这里先给出我的代码：https://www.kaggle.com/code/zixthw/classify-leaves-resnest-k-5-but
 ##### 网络模型
-只选取了ResNeSt50模型，但是课本和视频中似乎都没有介绍这个模型，所以这里简单介绍一下(与ResNet的区别)：  
+我没有按照Charlesyyun的思想选取多个模型最后综合取值，~~图快~~只选取了ResNeSt50模型  
+《ResNeSt: Split-Attention Networks》  
+代码：https://github.com/zhanghang1989/ResNeSt
+论文：https://hangzhang.org/files/resnest.pdf
+可以说ResNeSt与ResNet最主要的不同就是这个split-attention单元了：
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/5352b76a-2734-4f1f-92c0-a994c1acd565)  
+(split attention unit)
 
+SE-Net Block，SK-Net Block和RestNeSt Block的对比：
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/73230783-a6d6-4ccc-9998-a4159df69913)  
+(由于还没有学到注意力机制，所以只能介绍到这里了😢)
 
 ##### 数据增强(裁剪、翻转、颜色增强)
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/bbf71ecc-7dd9-4b8a-8e79-d19d0a83ebea)  
@@ -129,7 +138,7 @@ CutMix：https://github.com/ildoonet/cutmix
 ##### 训练与预测过程
 - 我还是将训练的训练正确率给每次打印出来了。  
 fold 0 的最后：
-![image](https://github.com/Zou1c/classify-leaves/assets/58977192/aa140dc7-5cf8-4113-a2af-7add77dd7204)  
+![image](https://github.com/Zou1c/classify-leaves/assets/58977192/aa140dc7-5cf8-4113-a2af-7add77dd7204)   
 可能是因为使用了不同的损失函数吧，训练损失和正确率与验证损失和正确率差别还挺大的。  
 
 - 由于当时晚上该睡觉了，但是只跑了k=0,1,2的模型，电脑开着对宿舍休息不太好，所以临时终止了完整的5则交叉验证的过程。
@@ -139,6 +148,6 @@ fold 0 的最后：
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/d386731f-f205-4e9f-83a2-317fbd9acda7)
 
 ### 感想
-其实还是留有一些疑问(对代码其实还不熟)和未做的尝试的(其他的模型啊)，要学的还有很多。。 
-数据处理部分还是对结果影响最大的啊（可能尤其是对数据集不够大的情况来说），如果我在自己的尝试中完成了k则交叉验证，预测正确率应该也会有明显的提升吧。
+其实还是留有一些疑问(对代码其实还不熟)和未做的尝试的(其他的模型啊)，要学的还有很多。。   
+数据处理部分还是对结果影响最大的啊（可能尤其是对数据集不够大的情况来说），如果我在自己的尝试中完成了k则交叉验证，预测正确率应该也会有明显的提升吧。  
 虽然数据增强是后面的内容，也算是提前接触了解了，总之先写到这里吧。

@@ -164,7 +164,7 @@ fold 0 的最后：
 - 然后就是一些epoch、lr、batch_size、的调参尝试经验。
 #### AutoGluon(AutoML)
 15行代码，安装加训练100分钟：  
-- https://www.kaggle.com/zhreshold/autogluon-vision-0-96-with-15-lines
+- https://www.kaggle.com/zhreshold/autogluon-vision-0-96-with-15-lines  
 精度96%  
 - 可以通过定制化提升精度
 - 下一个版本将搜索更多的超参数

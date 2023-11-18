@@ -135,7 +135,9 @@ CutMix：https://github.com/ildoonet/cutmix
 所以需要运行如下指令修改cutmix源码中的np.int为int(否则会报错)：
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/4fdcdd75-2a71-411d-9374-c1b1c9503e2d)
 
-##### TTA(Test Time Augmentation)
+##### TTA(Test Time Augmentation)——测试时增强
+https://arxiv.org/abs/2011.11156
+为了提升测试精度，在测试时也使用增强  
 
 ##### 训练的超参数
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/d6dc2fc0-009a-43d8-8a22-aba530edfffe)
@@ -168,4 +170,4 @@ fold 0 的最后：
 精度96%  
 - 可以通过定制化提升精度
 - 下一个版本将搜索更多的超参数
-- AG主要关注在工业界应用上，非比赛
+- AG主要关注在工业界应用上，非比赛(工业界应用还是非常不一样的，比如模型融合和测试时数据增强就很少用——计算代价过大)

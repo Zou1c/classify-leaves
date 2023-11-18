@@ -115,8 +115,10 @@ transforms.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4)：
 transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])：
 - 标准化图像的每个通道，使用给定的均值和标准差(imagenet训练时会使用的参数)。这是为了将图像的像素值归一化，以便更好地适应深度学习模型的训练。
 ***
-##### cutmix数据增强
-cutmix主要的处理过程如下：  
+##### CutMix数据增强(跨图片)
+CutMix主要思想就是随机组合来自不同图片块  
+
+CutMix主要的处理过程如下：  
 - 图像混合：对于每个训练样本，CutMix 会随机选择一张图像，并从该图像中随机剪切一个矩形区域。然后，将这个剪切的区域粘贴到当前图像上，同时调整标签以反映新的混合图像。
 - 混合参数：记录混合过程的参数，如混合区域的位置和大小，以及混合图像中原始图像的贡献程度。
 - 生成新样本： 最终，生成的新样本包含(前两步)混合后的图像以及相应的标签。
@@ -126,11 +128,14 @@ CutMix：https://github.com/ildoonet/cutmix
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/8f058750-d31d-432c-89ce-da1000fff1f5)  
 可以看到是先用自己的train_transform处理，再用CutMix处理。
 
+另一种跨图片增强是Mixup：随机叠加两张图片  
+
 ###### cutmix的numpy版本问题
 由于kaggle的notebook已经不支持numpy=1.20.0以下的版本了，但是在1.20版本后numpy.int的写法已经不行了，cutmix库里仍有两行代码在使用。  
 所以需要运行如下指令修改cutmix源码中的np.int为int(否则会报错)：
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/4fdcdd75-2a71-411d-9374-c1b1c9503e2d)
 
+##### TTA(Test Time Augmentation)
 
 ##### 训练的超参数
 ![image](https://github.com/Zou1c/classify-leaves/assets/58977192/d6dc2fc0-009a-43d8-8a22-aba530edfffe)
@@ -150,4 +155,17 @@ fold 0 的最后：
 ### 感想
 其实还是留有一些疑问(对代码其实还不熟)和未做的尝试的(其他的模型啊)，要学的还有很多。。   
 数据处理部分还是对结果影响最大的啊（可能尤其是对数据集不够大的情况来说），如果我在自己的尝试中完成了k则交叉验证，预测正确率应该也会有明显的提升吧。  
-虽然数据增强是后面的内容，也算是提前接触了解了，总之先写到这里吧。
+虽然数据增强是后面的内容，也算是提前接触了解了。  
+
+竟赛结束后有很多同学分享了自己的代码，直接在竞赛的"code"块就可以找到，学习别人的代码真的能收获挺多的
+### 总结
+- 学习率一般是Cosine的方式，或者是训练不动时往下调(如每隔几个epoch往下调)————比学习率不变要好很多  
+- 训练完要保存模型参数，不然就白训练了（虽然线上平台上你可以重置环境，重复运行代码，只有时间开销。但是有时候一个调参后的结果可以保存下来，对之后的改进还是很方便的）  
+- 然后就是一些epoch、lr、batch_size、的调参尝试经验。
+#### AutoGluon(AutoML)
+15行代码，安装加训练100分钟：  
+- https://www.kaggle.com/zhreshold/autogluon-vision-0-96-with-15-lines
+精度96%  
+- 可以通过定制化提升精度
+- 下一个版本将搜索更多的超参数
+- AG主要关注在工业界应用上，非比赛

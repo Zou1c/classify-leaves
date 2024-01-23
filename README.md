@@ -1,3 +1,4 @@
+[TOC]
 # classify-leaves
 李沐老师的《动手学深度学习Pytorch版》视频里，第30节发布了一个竞赛实验。    
 竞赛地址：https://www.kaggle.com/c/classify-leaves  
@@ -166,8 +167,9 @@ fold 0 的最后：
 - 然后就是一些epoch、lr、batch_size、的调参尝试经验。
 #### AutoGluon(AutoML)
 15行代码，安装加训练100分钟：  
-- https://www.kaggle.com/zhreshold/autogluon-vision-0-96-with-15-lines  
+- https://www.kaggle.com/zhreshold/autogluon-vision-0-96-with-15-lines
 精度96%  
 - 可以通过定制化提升精度
 - 下一个版本将搜索更多的超参数
 - AG主要关注在工业界应用上，非比赛(工业界应用还是非常不一样的，比如模型融合和测试时数据增强就很少用——计算代价过大)
+(这个代码在kaggle上由于版本问题似乎用不了了，这里贴一个AutoGluon官方文档：https://auto.gluon.ai/stable/index.html)

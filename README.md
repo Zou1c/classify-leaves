@@ -1,4 +1,3 @@
-[TOC]
 # classify-leaves
 李沐老师的《动手学深度学习Pytorch版》视频里，第30节发布了一个竞赛实验。    
 竞赛地址：https://www.kaggle.com/c/classify-leaves  
